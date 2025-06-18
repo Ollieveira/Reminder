@@ -24,6 +24,7 @@ class SplashViewController: UIViewController {
     // Funcao de configuracao da View, implementando a SplashView como uma Subview da Controller
     private func setup() {
         self.view.addSubview(contentView)
+        self.navigationController?.isNavigationBarHidden = true
         
         setupConstraints()
     }
