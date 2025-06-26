@@ -27,6 +27,7 @@ class SplashViewController: UIViewController {
         self.navigationController?.isNavigationBarHidden = true
         
         setupConstraints()
+        setupGesture()
     }
     
     // Funcao de configuracoes de constraints (limites) de tela da View
@@ -40,5 +41,24 @@ class SplashViewController: UIViewController {
         
         // Linha de código obrigatória toda vez que que adicionamos um elemento em UIKit sem Storyboard
         contentView.translatesAutoresizingMaskIntoConstraints = false
+    }
+    
+    // Funcao que configura um gesture para fazer aparecer a BottomSheetView (no caso, um toque na tela)
+    private func setupGesture() {
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(showLoginBottomSheet))
+        self.view.addGestureRecognizer(tapGesture)
+    }
+    
+    
+    // Funcao que configura a animacao criada na LogginBottomSheetViewController para aparecer na SplashView
+    // ela deve ter o @objc pois é necessário quando for chamada no #seletor
+    @objc
+    private func showLoginBottomSheet() {
+        let loginBottomSheet = LoginBottomSheetViewController()
+        loginBottomSheet.modalPresentationStyle = .overCurrentContext // Indica que a sheet irá aparecer por cima da view atual
+        loginBottomSheet.modalTransitionStyle = .crossDissolve
+        self.present(loginBottomSheet, animated: false) {
+            loginBottomSheet.animateShow()
+        }
     }
 }
