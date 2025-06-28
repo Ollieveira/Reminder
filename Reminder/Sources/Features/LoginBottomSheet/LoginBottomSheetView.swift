@@ -20,7 +20,7 @@ class LoginBottomSheetView: UIView {
     
     private let titleLabel: UILabel = {
         let label = UILabel()
-        label.text = "Entre para acessar suas receitas"
+        label.text = "login.label.title".localized
         label.font = Typografy.subHeading
         //        label.font = UIFont.preferredFont(forTextStyle: .headline)  tipo de fonte padrao do Swift (Apple) como é no SwiftUI
         label.textColor = .black
@@ -39,7 +39,7 @@ class LoginBottomSheetView: UIView {
     
     private let emailTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "email@exemplo.com"
+        textField.placeholder = "login.email.placeholder".localized
         textField.borderStyle = .roundedRect
         textField.font = Typografy.label
         textField.textColor = .black
@@ -59,7 +59,7 @@ class LoginBottomSheetView: UIView {
     
     private let passwordTextField: UITextField = {
         let textField = UITextField()
-        textField.placeholder = "senha"
+        textField.placeholder = "login.password.placeholder".localized
         textField.borderStyle = .roundedRect
         textField.isSecureTextEntry = true
         textField.autocapitalizationType = .none
@@ -69,7 +69,7 @@ class LoginBottomSheetView: UIView {
     
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
-        button.setTitle("Entrar", for: .normal)
+        button.setTitle("login.button.title".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.backgroundColor = Colors.primaryRedBase
         button.layer.cornerRadius = 28
