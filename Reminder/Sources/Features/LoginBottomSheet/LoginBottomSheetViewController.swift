@@ -57,3 +57,7 @@ class LoginBottomSheetViewController: UIViewController {
         }
     }
 }
+
+#Preview {
+    LoginBottomSheetViewController()
+}

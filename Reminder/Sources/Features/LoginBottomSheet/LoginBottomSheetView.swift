@@ -30,7 +30,7 @@ class LoginBottomSheetView: UIView {
     
     private let emailLabel: UILabel = {
         let label = UILabel()
-        label.text = "Email"
+        label.text = "login.email.label".localized
         label.font = Typografy.label
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +50,7 @@ class LoginBottomSheetView: UIView {
     
     private let passwordLabel: UILabel = {
         let label = UILabel()
-        label.text = "Senha"
+        label.text = "login.senha.label".localized
         label.font = Typografy.label
         label.textColor = .black
         label.translatesAutoresizingMaskIntoConstraints = false
@@ -67,10 +67,20 @@ class LoginBottomSheetView: UIView {
         return textField
     }()
     
+    private lazy var showPasswordButton: UIButton = {
+        let button = UIButton(type: .system)
+        button.setImage(UIImage(systemName: "eye"), for: .normal)
+        button.tintColor = .blue
+        button.translatesAutoresizingMaskIntoConstraints = false
+        button.addTarget(self, action: #selector(handleShowPasswordButton), for: .touchUpInside)
+        return button
+    }()
+    
     private let loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("login.button.title".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
+        button.titleLabel?.font = Typografy.subHeading
         button.backgroundColor = Colors.primaryRedBase
         button.layer.cornerRadius = 28
         button.translatesAutoresizingMaskIntoConstraints = false
@@ -86,6 +96,14 @@ class LoginBottomSheetView: UIView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    @objc
+    private func handleShowPasswordButton(){
+        passwordTextField.isSecureTextEntry.toggle()
+        
+        let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
+        showPasswordButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
     private func setupUI() {
         self.backgroundColor = .white
         self.layer.cornerRadius = Metrics.tiny
@@ -96,6 +114,7 @@ class LoginBottomSheetView: UIView {
         self.addSubview(emailTextField)
         self.addSubview(passwordLabel)
         self.addSubview(passwordTextField)
+        self.addSubview(showPasswordButton)
         self.addSubview(loginButton)
         
         setupConstraints()
@@ -118,7 +137,7 @@ class LoginBottomSheetView: UIView {
             emailTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.medium),
             emailTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.medium),
             emailTextField.heightAnchor.constraint(equalToConstant: 56),
-
+            
             
             passwordLabel.topAnchor.constraint(equalTo: emailTextField.bottomAnchor, constant: Metrics.medium),
             passwordLabel.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.medium),
@@ -127,8 +146,9 @@ class LoginBottomSheetView: UIView {
             passwordTextField.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.medium),
             passwordTextField.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -Metrics.medium),
             passwordTextField.heightAnchor.constraint(equalToConstant: 56),
-
-
+            
+            showPasswordButton.centerYAnchor.constraint(equalTo: passwordTextField.centerYAnchor),
+            showPasswordButton.trailingAnchor.constraint(equalTo: passwordTextField.trailingAnchor, constant: -Metrics.small),
             
             loginButton.topAnchor.constraint(equalTo: passwordTextField.bottomAnchor, constant: Metrics.medium),
             loginButton.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Metrics.medium),
@@ -136,4 +156,8 @@ class LoginBottomSheetView: UIView {
             loginButton.heightAnchor.constraint(equalToConstant: 56),
         ])
     }
+}
+
+#Preview {
+    LoginBottomSheetView()
 }
