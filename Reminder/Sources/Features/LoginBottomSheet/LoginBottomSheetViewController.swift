@@ -15,6 +15,7 @@ class LoginBottomSheetViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginView.delegate = self
         setupUI()
         setupGesture()
     }
@@ -55,6 +56,12 @@ class LoginBottomSheetViewController: UIViewController {
         }) { _ in
             completion?()
         }
+    }
+}
+
+extension LoginBottomSheetViewController: LoginBottomSheetViewDelegate {
+    func sendLogin(user: String, password: String) {
+        print("usuário \(user) e senha \(password)")
     }
 }
 

@@ -10,6 +10,8 @@ import UIKit
 
 class LoginBottomSheetView: UIView {
     
+    weak var delegate: LoginBottomSheetViewDelegate?
+    
     private let handleArea: UIView = {
         let view = UIView()
         view.backgroundColor = .lightGray
@@ -76,13 +78,14 @@ class LoginBottomSheetView: UIView {
         return button
     }()
     
-    private let loginButton: UIButton = {
+    private lazy var loginButton: UIButton = {
         let button = UIButton(type: .system)
         button.setTitle("login.button.title".localized, for: .normal)
         button.setTitleColor(.white, for: .normal)
         button.titleLabel?.font = Typografy.subHeading
         button.backgroundColor = Colors.primaryRedBase
         button.layer.cornerRadius = 28
+        button.addTarget(self, action: #selector(loginButtonDidTaped), for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         return button
     }()
@@ -102,6 +105,13 @@ class LoginBottomSheetView: UIView {
         
         let imageName = passwordTextField.isSecureTextEntry ? "eye" : "eye.slash"
         showPasswordButton.setImage(UIImage(systemName: imageName), for: .normal)
+    }
+    
+    @objc
+    private func loginButtonDidTaped() {
+        let user = emailTextField.text ?? ""
+        let password = passwordTextField.text ?? ""
+        delegate?.sendLogin(user: user, password: password)
     }
     
     private func setupUI() {
