@@ -1,0 +1,28 @@
+# Xcode
+# Ignorar configurações de usuário e build automático
+*.xcodeproj/xcuserdata/
+*.xcodeproj/project.xcworkspace/
+*.xcworkspace/xcuserdata/
+*.xcshareddata/
+DerivedData/
+build/
+
+# Swift Package Manager (SPM)
+.build/
+.swiftpm/
+
+# CocoaPods (se usar)
+Pods/
+Podfile.lock
+
+# Carthage (se usar)
+Carthage/Build/
+
+# Configurações do sistema
+.DS_Store
+*.swp
+
+# Fastlane
+fastlane/report.xml
+fastlane/Preview.html
+fastlane/screenshots
