@@ -13,7 +13,6 @@ build/
 
 # CocoaPods (se usar)
 Pods/
-Podfile.lock
 
 # Carthage (se usar)
 Carthage/Build/
