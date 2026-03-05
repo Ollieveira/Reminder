@@ -10,22 +10,30 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
+    var flowController: ReminderFlowCoordinator?
 
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
         guard let windowScene = (scene as? UIWindowScene) else { return }
         
         let window = UIWindow(windowScene: windowScene)
+        flowController = ReminderFlowCoordinator()
+        let rootViewController = flowController?.startFlow()
+        
         
         // Aqui deve entrar a ViewController que será a primeira tela do app (SplashScreen ou HomeView), por equanto criamos uma ViewController genérica, apenas para ter um inicio
 //        let viewController = UIViewController()
 //        viewController.view.backgroundColor = .red
         
         // Aqui foi criado uma navegação para a tela inicial do app e passamos a ViewController genérica que criamos como raiz. Assim quando abrir o app ele será direcionado a essa ViewController.
-        let navigation = UINavigationController(rootViewController: SplashViewController())
+//        let navigation = UINavigationController(rootViewController: SplashViewController())
+        
         
         // Nesta parte é a configuração final. Onde eu passo para a raiz da minha janela (window) a navigation, que é minha ViewController genérica. Atribuo ela a propriedade da classe com o self.windows e depois torno ela visivel. Isso é uma configuração padrão para um projeto UiKit sem Storyboard.
-        window.rootViewController = navigation
+        
+        //MARK: - Toda lógica acima foi inicial e agora foi transferida para o Coordinator que lida com todo o fluxo de navegação do app
+        
+        window.rootViewController = rootViewController
         self.window = window
         window.makeKeyAndVisible()
     }
