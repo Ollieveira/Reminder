@@ -10,12 +10,14 @@ import UIKit
 
 class LoginBottomSheetViewController: UIViewController {
     
-    let loginView = LoginBottomSheetView()
+    public weak var flowDelegate: LoginBottomSheetFlowDelegate?
+    let loginView: LoginBottomSheetView
     let viewmodel = LoginBottomSheetViewModel()
     var handleAreaHeight: CGFloat = 50.0
-    public weak var flowDelegate: LoginBottomSheetFlowDelegate?
     
-    init (flowDelegate: LoginBottomSheetFlowDelegate){
+    
+    init (loginView: LoginBottomSheetView, flowDelegate: LoginBottomSheetFlowDelegate){
+        self.loginView = loginView
         self.flowDelegate = flowDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -53,7 +55,6 @@ class LoginBottomSheetViewController: UIViewController {
     
     private func bindViewModel() {
         viewmodel.authSuccess = { [weak self ] in
-            self?.dismiss(animated: true)
             DispatchQueue.main.async {
                 self?.flowDelegate?.navigateToHome()
             }

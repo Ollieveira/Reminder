@@ -12,10 +12,11 @@ import UIKit
 class SplashViewController: UIViewController {
     
     // Instanciando a SplashView na SplashController, "dizendo" a classe que ela é responsavel por gerenciar esta View
-    let contentView = SplashView()
+    let splashView: SplashView
     public weak var flowSplashDelegate: SplashFlowDelegate?
     
-    init (flowSplashDelegate: SplashFlowDelegate){
+    init (splashView: SplashView,flowSplashDelegate: SplashFlowDelegate){
+        self.splashView = splashView
         self.flowSplashDelegate = flowSplashDelegate
         super.init(nibName: nil, bundle: nil)
     }
@@ -35,7 +36,7 @@ class SplashViewController: UIViewController {
     
     // Funcao de configuracao da View, implementando a SplashView como uma Subview da Controller
     private func setup() {
-        self.view.addSubview(contentView)
+        self.view.addSubview(splashView)
         self.navigationController?.isNavigationBarHidden = true
         
         setupConstraints()
@@ -45,14 +46,14 @@ class SplashViewController: UIViewController {
     // Funcao de configuracoes de constraints (limites) de tela da View
     private func setupConstraints() {
         NSLayoutConstraint.activate([
-            contentView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            contentView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            contentView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            contentView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
+            splashView.topAnchor.constraint(equalTo: self.view.topAnchor),
+            splashView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
+            splashView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
+            splashView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
         ])
         
         // Linha de código obrigatória toda vez que que adicionamos um elemento em UIKit sem Storyboard
-        contentView.translatesAutoresizingMaskIntoConstraints = false
+        splashView.translatesAutoresizingMaskIntoConstraints = false
     }
     
     // Funcao que configura um gesture para fazer aparecer a BottomSheetView (no caso, um toque na tela)
