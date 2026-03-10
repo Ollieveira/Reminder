@@ -10,4 +10,5 @@ import UIKit
 
 protocol SplashFlowDelegate: AnyObject {
     func showLoginBottomSheet()
+    func navigateToHome()
 }
