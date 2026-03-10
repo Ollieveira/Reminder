@@ -59,6 +59,12 @@ class LoginBottomSheetViewController: UIViewController {
                 self?.presentSaveLoginAlert(email: email)
             }
         }
+        
+        viewmodel.authenticationError = { [weak self] message in
+            DispatchQueue.main.async {
+                self?.presentErrorAlert(message: message)
+            }
+        }
     }
     
     private func presentSaveLoginAlert(email: String) {
@@ -76,6 +82,15 @@ class LoginBottomSheetViewController: UIViewController {
         
         alertController.addAction(saveAction)
         alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
+    }
+    
+    private func presentErrorAlert(message: String) {
+        let alertController = UIAlertController(title: "Erro ao Logar", message: "Erro ao realizar login: '\(message)' Verifique as credencias e tente novamente.", preferredStyle: .alert)
+        
+        let retryAction = UIAlertAction(title: "Tentar novamente", style: .default)
+        
+        alertController.addAction(retryAction)
         self.present(alertController, animated: true, completion: nil)
     }
     
