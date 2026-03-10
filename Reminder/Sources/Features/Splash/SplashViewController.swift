@@ -29,9 +29,17 @@ class SplashViewController: UIViewController {
     // Funcao do ciclo de vida das views, obrigatório para renderizar o conteudo na View
     override func viewDidLoad() {
         super.viewDidLoad()
-        
+        self.startBreathingAnimation()
         
         setup()
+    }
+    
+    private func decideNavigateFlow() {
+        if let user = UserDefaultsManager.loadUser(), user.isUserSaved {
+            self.flowSplashDelegate?.navigateToHome()
+        } else {
+            self.showLoginBottomSheet()
+        }
     }
     
     // Funcao de configuracao da View, implementando a SplashView como uma Subview da Controller
@@ -67,6 +75,24 @@ class SplashViewController: UIViewController {
     // ela deve ter o @objc pois é necessário quando for chamada no #seletor
     @objc
     private func showLoginBottomSheet() {
+        self.animateLogoUp()
         self.flowSplashDelegate?.showLoginBottomSheet()
+    }
+}
+
+// MARK: - Animations
+extension SplashViewController {
+    private func startBreathingAnimation() {
+        UIView.animate(withDuration: 1.4, delay: 0.0, animations: {
+            self.splashView.logoImageView.transform = CGAffineTransform(scaleX: 1.1, y: 1.1)
+        }, completion: { _ in
+            self.decideNavigateFlow()
+        })
+    }
+    
+    private func animateLogoUp() {
+        UIView.animate(withDuration: 0.5, delay: 0.0, options: .curveEaseOut, animations: {
+            self.splashView.logoImageView.transform = self.splashView.logoImageView.transform.translatedBy(x: 0, y: -150)
+        })
     }
 }
