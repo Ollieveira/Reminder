@@ -10,7 +10,7 @@ import FirebaseAuth
 
 class LoginBottomSheetViewModel {
     
-    var authSuccess: (() -> Void)?
+    var authSuccess: ((String) -> Void)?
     var authenticationError: ((String) -> Void)?
     
     
@@ -23,7 +23,7 @@ class LoginBottomSheetViewModel {
                 return
             }
             
-            self?.authSuccess?()
+            self?.authSuccess?(username)
         }
     }
 }

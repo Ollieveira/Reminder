@@ -54,11 +54,29 @@ class LoginBottomSheetViewController: UIViewController {
     }
     
     private func bindViewModel() {
-        viewmodel.authSuccess = { [weak self ] in
+        viewmodel.authSuccess = { [weak self] email in
             DispatchQueue.main.async {
-                self?.flowDelegate?.navigateToHome()
+                self?.presentSaveLoginAlert(email: email)
             }
         }
+    }
+    
+    private func presentSaveLoginAlert(email: String) {
+        let alertController = UIAlertController(title: "Salvar Acesso", message: "Deseja salvar o seu acesso?", preferredStyle: .alert)
+        
+        let saveAction = UIAlertAction(title: "Salvar", style: .default) { _ in
+            let user = User(email: email, isUserSaved: true)
+            UserDefaultsManager.saveUser(user: user)
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        let cancelAction = UIAlertAction(title: "Não", style: .cancel) { _ in
+            self.flowDelegate?.navigateToHome()
+        }
+        
+        alertController.addAction(saveAction)
+        alertController.addAction(cancelAction)
+        self.present(alertController, animated: true, completion: nil)
     }
     
     private func setupGesture() {
