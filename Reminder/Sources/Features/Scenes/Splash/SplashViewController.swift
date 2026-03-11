@@ -53,15 +53,7 @@ class SplashViewController: UIViewController {
     
     // Funcao de configuracoes de constraints (limites) de tela da View
     private func setupConstraints() {
-        NSLayoutConstraint.activate([
-            splashView.topAnchor.constraint(equalTo: self.view.topAnchor),
-            splashView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor),
-            splashView.bottomAnchor.constraint(equalTo: self.view.bottomAnchor),
-            splashView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor),
-        ])
-        
-        // Linha de código obrigatória toda vez que que adicionamos um elemento em UIKit sem Storyboard
-        splashView.translatesAutoresizingMaskIntoConstraints = false
+        setupContentViewToBounds(contentView: splashView)
     }
     
     // Funcao que configura um gesture para fazer aparecer a BottomSheetView (no caso, um toque na tela)
