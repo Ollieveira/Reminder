@@ -72,7 +72,7 @@ class LoginBottomSheetView: UIView {
     private lazy var showPasswordButton: UIButton = {
         let button = UIButton(type: .system)
         button.setImage(UIImage(systemName: "eye"), for: .normal)
-        button.tintColor = .blue
+        button.tintColor = Colors.primaryBlueBase
         button.translatesAutoresizingMaskIntoConstraints = false
         button.addTarget(self, action: #selector(handleShowPasswordButton), for: .touchUpInside)
         return button
@@ -168,6 +168,7 @@ class LoginBottomSheetView: UIView {
     }
 }
 
-//#Preview {
-//    LoginBottomSheetView()
-//}
+
+#Preview {
+    LoginBottomSheetView()
+}

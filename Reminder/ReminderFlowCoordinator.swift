@@ -35,6 +35,16 @@ extension ReminderFlowCoordinator: SplashFlowDelegate {
         navigationController?.present(loginBottomSheet, animated: false) {
             loginBottomSheet.animateShow()
         }
+        
+//        if let sheet = loginBottomSheet.sheetPresentationController {
+//            sheet.detents = [
+//                .medium(),
+//                .large()
+//            ]
+//            sheet.prefersGrabberVisible = true
+//            sheet.preferredCornerRadius = Metrics.small
+//        }
+//        navigationController?.present(loginBottomSheet, animated: true)
     }
 }
 
@@ -42,10 +52,8 @@ extension ReminderFlowCoordinator: SplashFlowDelegate {
 extension ReminderFlowCoordinator: LoginBottomSheetFlowDelegate {
     func navigateToHome() {
         self.navigationController?.dismiss(animated: false)
-        let viewController = UIViewController()
-        viewController.view.backgroundColor = .blue
-        
-        self.navigationController?.pushViewController(viewController, animated: true)
+        let homeViewController = viewControllerFactory.makeHomeViewController(flowHomeDelegate: self)
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
 }
 
